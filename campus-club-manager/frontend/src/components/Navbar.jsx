@@ -1,5 +1,6 @@
 import { useState } from 'react';
-import { Menu, X, User, LogOut } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Menu, X, User, LogOut, ChevronDown } from 'lucide-react';
 
 export default function Navbar({ onMenuToggle, isSidebarOpen }) {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -24,17 +25,24 @@ export default function Navbar({ onMenuToggle, isSidebarOpen }) {
             <span className="text-black text-sm font-bold">U</span>
           </div>
           <span className="hidden sm:block text-sm">User</span>
+          <ChevronDown className="w-4 h-4 text-muted" />
         </button>
 
         {dropdownOpen && (
-          <div className="absolute right-0 mt-2 w-48 bg-surface border border-border rounded-lg shadow-lg z-50">
-            <a href="/profile" className="flex items-center gap-2 px-4 py-3 hover:bg-secondary text-sm">
-              <User className="w-4 h-4" /> Profile
-            </a>
-            <a href="/logout" className="flex items-center gap-2 px-4 py-3 text-red-400 hover:bg-red-500/10 text-sm">
-              <LogOut className="w-4 h-4" /> Sign out
-            </a>
-          </div>
+          <>
+            <div className="fixed inset-0 z-40" onClick={() => setDropdownOpen(false)} />
+            <div className="absolute right-0 mt-2 w-48 bg-surface border border-border rounded-lg shadow-lg z-50">
+              <Link to="/profile" onClick={() => setDropdownOpen(false)} className="flex items-center gap-2 px-4 py-3 hover:bg-secondary text-sm">
+                <User className="w-4 h-4" /> Profile
+              </Link>
+              <button
+                onClick={() => setDropdownOpen(false)}
+                className="w-full flex items-center gap-2 px-4 py-3 text-red-400 hover:bg-red-500/10 text-sm"
+              >
+                <LogOut className="w-4 h-4" /> Sign out
+              </button>
+            </div>
+          </>
         )}
       </div>
     </header>
