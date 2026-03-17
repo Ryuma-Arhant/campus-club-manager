@@ -65,7 +65,7 @@ const memberModel = {
   },
 
   async updateStatus(id, status) {
-    await pool.query('UPDATE memberships SET staus = ? WHERE id = ?', [status, id]);
+    await pool.query('UPDATE memberships SET status = ? WHERE id = ?', [status, id]);
   },
 
   async updateRole(id, role) {
